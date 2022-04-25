@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function computeEstimate() {
+            var gas_price = document.getElementById('gas_price').value;
+            var miles_away = document.getElementById('miles_away').value;
+            var time_on_lawn = document.getElementById('time_on_lawn').value;
+            var drive_time = document.getElementById('drive_time').value;
+
+
+            var mpg = 8;
+            var time = .01;
+            var wage = 52;
+            var wage_per_minute = wage / 60;
+            var truck_maintenence = .35 * miles_away;
+
+            var route_cost = drive_time * wage_per_minute;
+            var truck_cost = truck_maintenence + route_cost;
+
+            var maintenence_cost = 0.02 * time_on_lawn;
+            var gallons_used = miles_away / mpg;
+            var gas_cost = gas_price * gallons_used;
+            var total_cost = ((time_on_lawn * wage) / 60 + maintenence_cost + gas_cost + route_cost)
+            var savings = total_cost * .25
+            var estimate = total_cost.toFixed(2);
+            var biestimate = (savings + total_cost).toFixed(2);
+            document.getElementById('estimate').innerHTML = "Weekly Estimate is $" + estimate;
+            document.getElementById('biestimate').innerHTML = "Bi-Weekly Estimate is $" + biestimate;
+        }
+
+    </script>
+
+    <title>Estimate Calculator</title>
+
+</head>
+
+<body>
+    <div class="calculator">
+        <h1>A+ Lawn Care Mowing Estimate Calculator</h1>
+        <label for="gas_price">Gas Price:</label>
+        <br>
+        <input id="gas_price" type="number" placeholder="Enter Gas Price" onchange="computeEstimate()">
+        <br>
+        <label for="miles_away">Miles from Home:</label>
+        <br>
+        <input id="miles_away" type="number" placeholder="Enter How Far Away" onchange="computeEstimate()">
+        <br>
+        <label for="drive_time">Time to get to location?(in minutes):</label>
+        <br>
+        <input id="drive_time" type="number" onchange="computeEstimate()">
+        <br>
+        <label for="time_on_lawn">Time it takes to complete:</label>
+        <br>
+        <input id="time_on_lawn" type="number" onchange="computeEstimate()">
+        <br>
+
+        <h2 id="estimate"></h2>
+        <h2 id="biestimate"></h2>
+
+    </div>
+</body>
+
+</html>
